@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const IP_ADDRESS = 'https://beeconnect-backend.onrender.com/'; 
 
-export const BASE_URL = `${IP_ADDRESS}/api`;
+export const BASE_URL = `${IP_ADDRESS}api`;
 export const BASE_URL_PICS = `${IP_ADDRESS}`;
 
 const apiClient = axios.create({

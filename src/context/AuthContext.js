@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import apiClient from '../api/apiClient';
+import LogRocket from '@logrocket/react-native';
 
 export const AuthContext = createContext();
 
@@ -18,6 +19,11 @@ export const AuthProvider = ({ children }) => {
         if (savedToken && savedUser) {
           setToken(savedToken);
           setUser(JSON.parse(savedUser));
+          LogRocket.identify(parsedUser._id, {
+            name: parsedUser.name,
+            email: parsedUser.email,
+            role: parsedUser.role,
+          });
           apiClient.defaults.headers.common['Authorization'] = `Bearer ${savedToken}`;
         }
       } catch (e) {
@@ -36,7 +42,11 @@ const login = async (userData, userToken) => {
     setToken(userToken);
     await AsyncStorage.setItem('userToken', userToken);
     await AsyncStorage.setItem('userData', JSON.stringify(userData));
-
+    LogRocket.identify(userData._id, {
+            name: userData.name,
+            email: userData.email,
+            role: userData.role, 
+          });
     apiClient.defaults.headers.common['Authorization'] = `Bearer ${userToken}`;
   } catch (e) {
     console.error("Login Context Error:", e);

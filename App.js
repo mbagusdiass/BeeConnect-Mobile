@@ -31,9 +31,10 @@ import EditProductScreen from './src/screens/EditProductScreen';
 import AddProductScreen from './src/screens/AddProductScreen';
 import SellerOrderScreen from './src/screens/SellerOrderScreen';
 import AddUserScreen from './src/screens/AddUserScreen';
+import LogRocket from '@logrocket/react-native';
 
 const Stack = createStackNavigator();
-
+LogRocket.init('xopp7v/beeconnect-mobile');
 export default function App() {
   return (
     <AuthProvider>
